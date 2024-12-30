@@ -13,7 +13,7 @@ public class Date {
             {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     // constructor: confirm proper value for month and day given the year
-    public Date(int month, int day, int year) {
+    public Date(int year, int month, int day) {
         // check if month in range
         if (month <= 0 || month > 12) {
             throw new IllegalArgumentException(
@@ -67,5 +67,11 @@ public class Date {
             System.out.print("Month:"+month+" Day:"+ day+"\n");
         }
 
+    }
+    public String getDate(){
+        return String.format("Date of birth: %d%d%d", year, month, day);
+    }
+    public int getMonthOfBirth(){
+        return month;
     }
 }
