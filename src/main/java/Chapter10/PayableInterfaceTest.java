@@ -21,17 +21,15 @@ public class PayableInterfaceTest {
                 basePlusCommissionEmployee.setBaseSalary(basePlusCommissionEmployee.getBaseSalary()*1.1);
             }
         }
-        // generically process each element in array payableObjects
         for (Payable currentPayable : payableObjects) {
-            // output currentPayable and its appropriate payment amount
             if (currentPayable.getClass().getName().equals("BasePlusCommissionEmployee")){
                 System.out.printf("%n%s %n payment due: $%,.2f%n",
-                        currentPayable, // could invoke implicitly
+                        currentPayable,
                         currentPayable.getPaymentAmount()*1.1);
             }
             else {
                 System.out.printf("%n%s %n payment due: $%,.2f%n",
-                        currentPayable, // could invoke implicitly
+                        currentPayable,
                         currentPayable.getPaymentAmount());
             }
         }
