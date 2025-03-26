@@ -66,6 +66,25 @@ public class Sentence {
         System.out.println(map.toString());
     }
 
+    public void printWordsWithCapitalLetter (){
+        for (String s : tokenizedSentence){
+            if(Character.isUpperCase(s.charAt(0))){
+                System.out.println(s);
+            }
+        }
+    }
+    public void printWordsEndingWithED (){
+        for (String s : tokenizedSentence){
+            if(s.toLowerCase().endsWith("ed")){
+                System.out.println(s);
+            }
+        }
+    }
+
+    public static void printCharBasedOnUnicode(int code){
+        System.out.println((char) code);
+    }
+
     @Override
     public String toString() {
         return sentence;
