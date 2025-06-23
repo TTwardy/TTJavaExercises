@@ -19,6 +19,10 @@ public class Account {
         this.lastName = lastName;
         this.balance = balance;
     }
+    public Account(int accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
     protected void combine(TransactionRecord transactionRecord){
         this.balance =+ transactionRecord.getTransactionAmount();
     }

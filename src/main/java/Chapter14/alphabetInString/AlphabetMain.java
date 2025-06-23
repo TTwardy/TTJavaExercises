@@ -11,5 +11,7 @@ public class AlphabetMain {
         Sentence sentence = new Sentence(scanner.nextLine());
         sentence.countAllCharacters();
 
+        System.out.println("Char index: "+sentence.customIndexOf('a'));
+
     }
 }

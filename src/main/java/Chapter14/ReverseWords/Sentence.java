@@ -1,9 +1,6 @@
 package Chapter14.ReverseWords;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Sentence {
     String sentence;
@@ -85,6 +82,36 @@ public class Sentence {
         System.out.println((char) code);
     }
 
+    public static void generatePermutations(String current, List<Character> available, Set<String> result) {
+        // Base case: If the current string reaches length 3, store it
+        if (current.length() == 3) {
+            result.add(current);
+            return; // Stop further recursion
+        }
+
+        // Loop through available characters
+        for (int i = 0; i < available.size(); i++) {
+            // Choose a character
+            char chosen = available.get(i);
+
+            // Create a new list without the chosen character
+            List<Character> remaining = new ArrayList<>(available);
+            remaining.remove(i);
+
+            // Recurse with the new word and remaining letters
+            generatePermutations(current + chosen, remaining, result);
+        }
+    }
+
+
+    public int customIndexOf (char character){
+        for (int i = 0; i<=sentence.length()-1; i++){
+            if (sentence.charAt(i)==character){
+                return i;
+            }
+        }
+        return -1;
+    }
     @Override
     public String toString() {
         return sentence;
