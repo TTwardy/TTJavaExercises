@@ -10,36 +10,56 @@ import java.util.Scanner;
 public class FileMatch {
     static Scanner oldMastScanner;
     static Scanner transactionsScanner;
+    static boolean isMultipleTransactions;
 
     protected static void compareTransactionsToOldMast() throws IOException {
+        double transactionBalance = 0;
         initializeScanners();
+        Account currentAccount=readNextAccount(oldMastScanner);
+        TransactionRecord currentTransaction;
         try (
                 Formatter newMastWriter = new Formatter("newMast.txt");
                 Formatter logWriter = new Formatter("log.txt");
         ) {
             while (oldMastScanner.hasNext() || transactionsScanner.hasNext()) {
-                Account currentAccount = readNextAccount(oldMastScanner);
-                TransactionRecord currentTransaction = readNextTransaction(transactionsScanner);
+                currentTransaction = readNextTransaction(transactionsScanner);
+                if (currentTransaction.getAccountNumber()==currentAccount.getAccountNumber()){
+                    transactionBalance += currentTransaction.getTransactionAmount();
+                    isMultipleTransactions=true;
+                    continue;
+                }
+
+                if(isMultipleTransactions){
+                    newMastWriter.format("%d %s %s %.2f\n", currentAccount.getAccountNumber(), currentAccount.getFirstName(), currentAccount.getLastName(),
+                            currentAccount.getBalance()+transactionBalance);
+                    isMultipleTransactions=false;
+                    transactionBalance = 0;
+                }
+                currentAccount = readNextAccount(oldMastScanner);
                 if (currentAccount == null) {
                     logWriter.format("%s %d %.2f\n", "Unmatched transaction for account:", currentTransaction.getAccountNumber(), currentTransaction.getTransactionAmount());
                 } else if (currentTransaction == null) {
-                    newMastWriter.format("%d %s %s %.2f\n", currentAccount.getAccountNumber(), currentAccount.getFirstName(), currentAccount.getLastName(),
-                            currentAccount.getBalance());
+                    writeAccount(newMastWriter, currentAccount);
                 } else if (currentAccount.getAccountNumber() == currentTransaction.getAccountNumber()) {
-                    newMastWriter.format("%d %s %s %.2f\n", currentAccount.getAccountNumber(), currentAccount.getFirstName(), currentAccount.getLastName(),
-                            currentAccount.getBalance() + currentTransaction.getTransactionAmount());
+                    writeAccount(newMastWriter, currentAccount, currentTransaction.getTransactionAmount());
                 } else if (currentAccount.getAccountNumber() < currentTransaction.getAccountNumber()) {
-                    newMastWriter.format("%d %s %s %.2f\n", currentAccount.getAccountNumber(), currentAccount.getFirstName(), currentAccount.getLastName(),
-                            currentAccount.getBalance());
+                    writeAccount(newMastWriter, currentAccount);
                 } else {
                     logWriter.format("%s %d %.2f\n", "Unmatched transaction for account:", currentTransaction.getAccountNumber(), currentTransaction.getTransactionAmount());
-                    newMastWriter.format("%d %s %s %.2f\n", currentAccount.getAccountNumber(), currentAccount.getFirstName(), currentAccount.getLastName(),
-                            currentAccount.getBalance());
+                    writeAccount(newMastWriter, currentAccount);
                 }
             }
         }
     }
 
+    private static void writeAccount(Formatter writer, Account account, double delta) {
+        writer.format("%d %s %s %.2f\n", account.getAccountNumber(), account.getFirstName(), account.getLastName(),
+                account.getBalance() + delta);
+    }
+
+    private static void writeAccount(Formatter writer, Account account) {
+        writeAccount(writer, account, 0);
+    }
     protected static void initializeScanners() throws IOException {
         oldMastScanner = new Scanner(Paths.get("oldMast.txt"));
         transactionsScanner = new Scanner(Paths.get("transactions.txt"));
@@ -62,18 +82,3 @@ public class FileMatch {
     }
 
 }
-//    protected static void updateRecords(int accountNumber, double balanceChange) {
-//        try (Formatter writer = new Formatter("newMast.txt")) {
-//            for (Account account : accounts.getAccounts()) {
-//                try {
-//                    writer.format("%d %s %s %.2f\n", account.getAccountNumber(), account.getFirstName(), account.getLastName(), account.getBalance());
-//                } catch (Exception e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-

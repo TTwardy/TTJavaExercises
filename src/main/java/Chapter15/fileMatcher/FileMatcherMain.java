@@ -42,7 +42,9 @@ public class FileMatcherMain {
         List<TransactionRecord> transactionRecords = new ArrayList<>();
         transactionRecords.add(new TransactionRecord(1000, 100));
         transactionRecords.add(new TransactionRecord(1000, 50));
+        transactionRecords.add(new TransactionRecord(1000, -150));
         transactionRecords.add(new TransactionRecord(2000, -500));
+        transactionRecords.add(new TransactionRecord(2000, 5500));
         transactionRecords.add(new TransactionRecord(2222, 999));
         transactionRecords.add(new TransactionRecord(2333, 99));
 
