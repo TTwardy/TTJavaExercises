@@ -41,8 +41,10 @@ public class FileMatcherMain {
     private static void createTransactions(){
         List<TransactionRecord> transactionRecords = new ArrayList<>();
         transactionRecords.add(new TransactionRecord(1000, 100));
-        transactionRecords.add(new TransactionRecord(2000, 88));
+        transactionRecords.add(new TransactionRecord(1000, 50));
+        transactionRecords.add(new TransactionRecord(2000, -500));
         transactionRecords.add(new TransactionRecord(2222, 999));
+        transactionRecords.add(new TransactionRecord(2333, 99));
 
         try (Formatter writer = new Formatter("transactions.txt")) {
             for (TransactionRecord transactionRecord : transactionRecords){
