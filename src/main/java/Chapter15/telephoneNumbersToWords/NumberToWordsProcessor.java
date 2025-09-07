@@ -27,6 +27,10 @@ public class NumberToWordsProcessor {
             return;
         }
         int digit = Character.getNumericValue((phoneNumber).charAt(index));
+        if (digit <= 2) {
+            generateCombinations(index + 1, currentWord, formatter);
+            return;
+        }
         String letters = keypad[digit];
 
         for (int i = 0; i < letters.length(); i++) {
