@@ -2,6 +2,7 @@ package Chapter15.telephoneNumbersToWords;
 
 import java.io.FileNotFoundException;
 import java.util.Formatter;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class TelephoneNumbersToWordsMain {
