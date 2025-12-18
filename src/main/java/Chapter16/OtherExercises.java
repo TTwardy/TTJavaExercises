@@ -6,6 +6,11 @@ import java.util.*;
 
 public class OtherExercises {
     public static void main(String[] args) {
+
+        List<Integer> firstList = new LinkedList<>(List.of(3,1,7,4));
+        List<Integer> secondList = new LinkedList<>(List.of(5,6,0,8,9,11));
+
+        System.out.println(MixLinkedLists.mixLists(firstList,secondList));
         // add colors elements to list1
 //        String[] colors =
 //                {"black", "yellow", "green", "blue", "violet", "silver"};
@@ -32,20 +37,20 @@ public class OtherExercises {
 
             // queue of capacity 11
 
-            PriorityQueue<Double> queue = new PriorityQueue<>(new DescendingComparator());
-
-            // insert elements to queue
-            queue.offer(3.2);
-            queue.offer(9.8);
-            queue.offer(5.4);
-
-            System.out.print("Polling from queue: ");
-
-            // display elements in queue
-            while (queue.size() > 0) {
-                System.out.printf("%.1f ", queue.peek()); // view top element
-                queue.poll(); // remove top element
-            }
+//            PriorityQueue<Double> queue = new PriorityQueue<>(new DescendingComparator());
+//
+//            // insert elements to queue
+//            queue.offer(3.2);
+//            queue.offer(9.8);
+//            queue.offer(5.4);
+//
+//            System.out.print("Polling from queue: ");
+//
+//            // display elements in queue
+//            while (queue.size() > 0) {
+//                System.out.printf("%.1f ", queue.peek()); // view top element
+//                queue.poll(); // remove top element
+//            }
 
     }
 
