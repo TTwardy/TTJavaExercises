@@ -1,34 +1,52 @@
 package Chapter16;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import Chapter16.SortingAccounts.DescendingComparator;
+
+import java.util.*;
 
 public class OtherExercises {
     public static void main(String[] args) {
         // add colors elements to list1
-        String[] colors =
-                {"black", "yellow", "green", "blue", "violet", "silver"};
-        List<String> list1 = new LinkedList<>(Arrays.asList(colors));
+//        String[] colors =
+//                {"black", "yellow", "green", "blue", "violet", "silver"};
+//        List<String> list1 = new LinkedList<>(Arrays.asList(colors));
+//
+//        // add colors2 elements to list2
+//        String[] colors2 =
+//                {"gold", "white", "brown", "blue", "gray", "silver"};
+//        List<String> list2 = new LinkedList<>(Arrays.asList(colors2));
+//
+//
+//        list1.addAll(list2); // concatenate lists
+//        list2 = null; // release resources
+//        printList(list1); // print list1 elements
+//
+//        convertToUppercaseStrings(list1); // convert to uppercase string
+//        printList(list1); // print list1 elements
+//
+//        System.out.printf("%nDeleting elements 4 to 6...");
+//        removeItems(list1, 4, 7); // remove items 4-6 from list
+//        printList(list1); // print list1 elements
+//        printReversedList(list1); // print list in reverse order
 
-        // add colors2 elements to list2
-        String[] colors2 =
-                {"gold", "white", "brown", "blue", "gray", "silver"};
-        List<String> list2 = new LinkedList<>(Arrays.asList(colors2));
 
+            // queue of capacity 11
 
-        list1.addAll(list2); // concatenate lists
-        list2 = null; // release resources
-        printList(list1); // print list1 elements
+            PriorityQueue<Double> queue = new PriorityQueue<>(new DescendingComparator());
 
-        convertToUppercaseStrings(list1); // convert to uppercase string
-        printList(list1); // print list1 elements
+            // insert elements to queue
+            queue.offer(3.2);
+            queue.offer(9.8);
+            queue.offer(5.4);
 
-        System.out.printf("%nDeleting elements 4 to 6...");
-        removeItems(list1, 4, 7); // remove items 4-6 from list
-        printList(list1); // print list1 elements
-        printReversedList(list1); // print list in reverse order
+            System.out.print("Polling from queue: ");
+
+            // display elements in queue
+            while (queue.size() > 0) {
+                System.out.printf("%.1f ", queue.peek()); // view top element
+                queue.poll(); // remove top element
+            }
+
     }
 
     // output List contents
